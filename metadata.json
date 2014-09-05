@@ -1,0 +1,16 @@
+{
+  "name": "softecspa-logship",
+  "version": "0.1.0",
+  "author": "softecspa",
+  "summary": "generic module to manage log shipping through data collector (ex: fluentd)",
+  "license": "Apache 2.0",
+  "source": "https://github.com/softecspa/puppet-logship",
+  "project_page": "https://github.com/softecspa/puppet-logship",
+  "issues_url": "https://github.com/softecspa/puppet-logship/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ]
+}

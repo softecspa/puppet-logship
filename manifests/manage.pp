@@ -4,6 +4,7 @@ define logship::manage (
   $log_path,
   $ensure               = 'present',
   $config_file_name     = '',
+  $fluentd_pos_dir	= undef,
   $fluentd_type         = undef,
   $fluentd_format       = undef,
   $fluentd_match_config = undef,
@@ -34,7 +35,7 @@ define logship::manage (
       include fluentd
       
       $input_configs = {
-        'path'      => $fluentd_path,
+        'path'      => $log_path,
         'pos_file'  => "${fluentd_pos_dir}${name}_fluentd.pos",
       }
 	

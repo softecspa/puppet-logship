@@ -63,7 +63,7 @@ define logship::manage (
           $destination_config = {}
         }
       }
-      $output_config = merge($fluentd_math_config, $destination_config)
+      $output_config = merge($fluentd_match_config, $destination_config)
 
       fluentd::match{ "${name}_match":
         configfile  => $config_file,

@@ -34,7 +34,7 @@ define logship::manage (
     'fluentd':  {
       include fluentd
 
-      case $destination {
+      case $fluentd_type {
         'tail_multiline': {
           if !defined(Fluentd::Install_plugin['fluent-plugin-tail-multiline']) {
             fluentd::install_plugin {'fluent-plugin-tail-multiline':

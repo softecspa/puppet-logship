@@ -9,6 +9,6 @@
   "issues_url": "https://github.com/softecspa/puppet-logship/issues",
   "dependencies": [
     { "name": "puppetlabs-stdlib", "version_requirement": ">= 1.0.0" },
-    { "name": "softecspa-fluentd" }
+    { "name": "softecspa-fluentd", "version_requirement": ">= 0.0.0" }
   ]
 }

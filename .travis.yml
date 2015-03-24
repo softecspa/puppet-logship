@@ -10,7 +10,7 @@ env:
   - PUPPET_LOCATION="~> 3.7.0" PARSER="future"
   - PUPPET_LOCATION="~> 3.7.0"
 before_script:
-  - ./vendor/bundle/ruby/2.1.0/bin/r10k puppetfile install
+  - bundle exec r10k puppetfile install
 script:
   - bundle exec rake test
   - puppet apply --test --noop --modulepath=./modules tests/init.pp 

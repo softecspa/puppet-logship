@@ -12,6 +12,7 @@ env:
 before_script:
   - bundle exec r10k puppetfile install
 script:
+  - ls -l ./modules 
   - bundle exec rake test
   - bundle exec puppet apply --test --noop --modulepath=./modules tests/init.pp 
 notifications:

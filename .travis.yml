@@ -10,11 +10,8 @@ env:
   - PUPPET_LOCATION="~> 3.7.0" PARSER="future"
   - PUPPET_LOCATION="~> 3.7.0"
   - PUPPETFILE_DIR="vendor/modules"
-before_script:
-  - bundle exec r10k --verbose 3 puppetfile install
 script:
   - bundle exec rake test
-  - bundle exec puppet apply --test --noop --modulepath=$PUPPETFILE_DIR tests/init.pp 
 notifications:
   email: false
   slack:

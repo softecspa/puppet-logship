@@ -10,11 +10,11 @@ env:
   - PUPPET_LOCATION="~> 3.7.0" PARSER="future"
   - PUPPET_LOCATION="~> 3.7.0"
 before_script:
-  - `find -type d -name "r10k-*"`/bin/r10k puppetfile install
+  - $(find -type d -name "r10k-*")/bin/r10k puppetfile install
 script:
   - bundle exec rake test
   - puppet apply --test --noop --modulepath=./modules tests/init.pp 
 notifications:
+  email: false
   slack:
     secure: IEpthWx2hFDiQrLDIdfieDDVfte3hKGFaFDvBT8DHk7JQnX0LeABzkA7OBrI1mcXvToCmInwLCje73pEAP59f6v+yYToGenwb8b6xlGHEzAnbuYYgL0IlcY+v6M1ze/NsS+2YS/3QAfBgQhfxQPW9XRocfDH3WZBR2YeUQp1ip0=
-  email: false

@@ -113,7 +113,7 @@ class ispconfig_logarchive (
   $aws_secret_key                 = $::aws_secret_key,
   $s3_bucket_name                 = $::s3_logarchive_bucket,
   $s3_bucket_endpoint             = $::s3_bucket_endpoint,
-  $s3_logpath                     = "logs/${cluster}/${::hostname}/",
+  $s3_logpath                     = "logs/${::cluster}/${::hostname}/",
   $apache2                        = true,
   $proftpd                        = true,
   $mail                           = true,
@@ -136,11 +136,11 @@ class ispconfig_logarchive (
 ) inherits ispconfig_logarchive::params {
 
   if !($data_collector in $ispconfig_logarchive::params::data_collectors) {
-    fail("$data_collector is not actually supported")
+    fail("${data_collector} is not actually supported")
   }
 
   if !($destination in $ispconfig_logarchive::params::destinations) {
-    fail("$destination is not actually supported")
+    fail("${destination} is not actually supported")
   }
 
   class {"ispconfig_logarchive::${data_collector}::install": }

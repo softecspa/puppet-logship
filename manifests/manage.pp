@@ -1,10 +1,12 @@
+# == Define: logship::manage
+#
 define logship::manage (
   $data_collector,
   $destination,
   $log_path,
   $ensure               = 'present',
   $config_file_name     = '',
-  $fluentd_pos_dir	= undef,
+  $fluentd_pos_dir      = undef,
   $fluentd_type         = undef,
   $fluentd_format       = undef,
   $fluentd_match_config = undef,
@@ -18,11 +20,11 @@ define logship::manage (
   include logship::params
 
   if !($data_collector in $logship::params::data_collectors) {
-    fail("data_collector '$data_collector' is not actually supported")
+    fail("data_collector '${data_collector}' is not actually supported")
   }
 
   if !($destination in $logship::params::destinations[$data_collector]) {
-    fail("destination '$destination' is not actually supported for data_collector '$data_collector'")
+    fail("destination '${destination}' is not actually supported for data_collector '${data_collector}'")
   }
 
   $config_file = $config_file_name? {
@@ -50,15 +52,15 @@ define logship::manage (
         'path'      => $log_path,
         'pos_file'  => "${fluentd_pos_dir}${name}_fluentd.pos",
       }
-	
-      fluentd::configfile {$config_file:}
+
+      fluentd::configfile{$config_file:}
       fluentd::source{ "${name}_source":
-        configfile  => $config_file,
-        type        => $fluentd_type,
-        format      => $fluentd_format,
-        tag         => "${destination}.${name}.log",
-        config      => $input_configs,
-        notify      => Class['fluentd::service']
+        configfile => $config_file,
+        type       => $fluentd_type,
+        format     => $fluentd_format,
+        tag        => "${destination}.${name}.log",
+        config     => $input_configs,
+        notify     => Class['fluentd::service']
       }
 
       case $destination {
@@ -78,11 +80,11 @@ define logship::manage (
       $output_config = merge($fluentd_match_config, $destination_config)
 
       fluentd::match{ "${name}_match":
-        configfile  => $config_file,
-        config      => $output_config,
-        type        => $destination,
-        pattern     => "${destination}.${name}.*",
+        configfile => $config_file,
+        config     => $output_config,
+        type       => $destination,
+        pattern    => "${destination}.${name}.*",
       }
-    }  
+    }
   }
 }

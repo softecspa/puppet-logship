@@ -5,9 +5,12 @@ rvm:
   - 2.0.0
   - 2.1.0
 
+before_script:
+  - r10k puppetfile install
+
 script:
   - bundle exec rake test
-
+  - puppet apply --test --module-path=./modules tests/init.pp 
 
 notifications:
   slack:

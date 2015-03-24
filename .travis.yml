@@ -10,7 +10,7 @@ before_script:
 
 script:
   - bundle exec rake test
-  - puppet apply --test --module-path=./modules tests/init.pp 
+  - puppet apply --test --noop --modulepath=./modules tests/init.pp 
 
 notifications:
   slack:

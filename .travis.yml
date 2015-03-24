@@ -1,16 +1,20 @@
+---
 language: ruby
-
+sudo: false
+cache: bundler
 rvm:
   - 1.9.3
   - 2.1.0
-
-before_script:
-  - r10k puppetfile install
-
+env:
+  - PUPPET_LOCATION="~> 3.6.0" PARSER="future"
+  - PUPPET_LOCATION="~> 3.7.0" PARSER="future"
+  - PUPPET_LOCATION="~> 3.6.0"
+  - PUPPET_LOCATION="~> 3.7.0"
 script:
   - bundle exec rake test
   - puppet apply --test --noop --modulepath=./modules tests/init.pp 
-
+before_script:
+  - r10k puppetfile install
 notifications:
   slack:
     secure: IEpthWx2hFDiQrLDIdfieDDVfte3hKGFaFDvBT8DHk7JQnX0LeABzkA7OBrI1mcXvToCmInwLCje73pEAP59f6v+yYToGenwb8b6xlGHEzAnbuYYgL0IlcY+v6M1ze/NsS+2YS/3QAfBgQhfxQPW9XRocfDH3WZBR2YeUQp1ip0=
